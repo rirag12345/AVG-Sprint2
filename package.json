@@ -1,0 +1,16 @@
+{
+  "name": "avg-sprint2",
+  "version": "1.0.0",
+  "description": "Quellcode für AVG Abgabe 2",
+  "private": true,
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/main.js"
+  },
+  "author": "AVG Gruppe 2",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "mqtt": "5.10.1"
+  }
+}
