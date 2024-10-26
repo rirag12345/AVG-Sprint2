@@ -1,0 +1,12 @@
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:2.0.20
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    ports:
+      - published: 1883
+        target: 1883
