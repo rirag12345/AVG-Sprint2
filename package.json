@@ -10,7 +10,7 @@
     "start": "node src/main.js"
   },
   "author": "AVG Gruppe 2",
-  "license": "GPL-3.0-only",
+  "license": "MIT License",
   "dependencies": {
     "mqtt": "5.10.1"
   },
