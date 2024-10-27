@@ -13,8 +13,8 @@ services:
     volumes:
       - type: bind
         source: ./config/mosquitto.conf
-        target: /mosquitto/conf/mosquitto.conf
-        read_only: true
+        target: /mosquitto/config/mosquitto.conf
+        # read_only: true
       - type: bind
         source: ./data
         target: /mosquitto/data

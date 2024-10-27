@@ -129,4 +129,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Folder for the task
 task/
+
+# Mosquitto files to ignore
+/extras/compose/mosquitto/data/*
+/extras/compose/mosquitto/log/*
