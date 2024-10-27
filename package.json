@@ -2,6 +2,7 @@
   "name": "avg-sprint2",
   "version": "1.0.0",
   "description": "Quellcode für AVG Abgabe 2",
+  "type": "module",
   "private": true,
   "main": "src/main.js",
   "scripts": {
