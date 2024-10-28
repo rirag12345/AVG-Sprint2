@@ -9,7 +9,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/main.js"
   },
-  "author": "AVG Gruppe 2",
+  "contributors" : [
+    {
+      "name": "Felix Jäger",
+      "email": "tba",
+    },
+    {
+      "name": "Philip Neuffer",
+      "email": "tba",
+    }
+  ],
   "license": "MIT License",
   "dependencies": {
     "mqtt": "5.10.1"
