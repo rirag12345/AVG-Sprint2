@@ -12,19 +12,11 @@
   "contributors" : [
     {
       "name": "Felix Jäger",
-<<<<<<< HEAD
       "email": "tba",
     },
     {
       "name": "Philip Neuffer",
       "email": "tba",
-=======
-      "email": "emai@placeholder.net"
-    },
-    {
-      "name": "Philip Neuffer",
-      "email": "email@placeholder.net"
->>>>>>> master
     }
   ],
   "license": "MIT License",
