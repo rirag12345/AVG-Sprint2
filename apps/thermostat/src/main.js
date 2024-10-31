@@ -1,17 +1,15 @@
 import mqtt from "mqtt";
+import { publishTemperature } from "./publisher.js";
+import { pollTemperature } from "./subscriber.js";
 
 const connectionString = "mqtt://localhost:1883";
 const client = mqtt.connect(connectionString);
+const topic = "thermostat";
+const publishIntervall = 2000;
 
 client.on("connect", () => {
-    client.subscribe("Test", err => {
-        if (!err) {
-            client.publish("Test", "Hello World");
-        }
-    });
+    publishTemperature(topic, publishIntervall);
+    pollTemperature(topic);
 });
 
-client.on("message", (topic, message) => {
-    console.log(`${message} from topic ${topic}`);
-    client.end();
-});
+export { client };
