@@ -1,9 +1,10 @@
-import { client } from "./main.js";
+import { CLIENT } from "./main.js";
 
 /**
- * Publishes a random temperature to a given topic at specified intervals.
+ * Publishes a (pseudo)random temperature to a given topic at specified intervals.
+ * @author Philip Neuffer
  * @param {string} topic The topic to publish the temperature to.
- * @param {number} publishIntervall The interval in milliseconds at which to publish the temperature.
+ * @param {number} publishIntervall The interval in milliseconds after which to publish the temperature.
  * @returns {void}
  */
 function publishTemperature(topic, publishIntervall) {
@@ -13,7 +14,7 @@ function publishTemperature(topic, publishIntervall) {
             var temperature = Math.floor(Math.random() * 100);
         } while (temperature > 30);
 
-        client.publish(topic, temperature.toString());
+        CLIENT.publish(topic, temperature.toString());
     }, publishIntervall);
 }
 
