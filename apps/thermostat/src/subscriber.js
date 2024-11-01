@@ -8,7 +8,7 @@ import { client } from "./main.js";
 function pollTemperature(topic) {
     client.subscribe(topic);
     client.on("message", message => {
-        // eslint-disable-next-line no-console -- This projekt is a CLI application
+        // eslint-disable-next-line no-console -- This projekt is only run in the console
         console.log(`${topic}: ${message.toString()}`);
     });
 }
