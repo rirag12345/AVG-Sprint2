@@ -9,7 +9,6 @@ import { client } from "./main.js";
 function publishTemperature(topic, publishIntervall) {
     setInterval(() => {
         do {
-
             // eslint-disable-next-line no-var -- var is used here because block scope is annoying in this case
             var temperature = Math.floor(Math.random() * 100);
         } while (temperature > 30);
