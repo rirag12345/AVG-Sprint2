@@ -3,7 +3,8 @@
  * Responsible for connecting to mosquitto and starting the control itself.
  * @module main
  * @requires mqtt
- * @exports Client
+ * @requires control
+ * @exports CLIENT
  * @author Felix Jaeger
  */
 import mqtt from "mqtt";

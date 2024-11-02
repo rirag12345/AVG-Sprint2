@@ -3,7 +3,8 @@
  * Using integration technique message exchange via MQTT topics.
  * Control acts as consumer and producer for messages.
  * @module control
- * @requires client
+ * @requires CLIENT
+ * @exports start
  * @author Felix Jaeger
  */
 import { CLIENT } from "./main.js";
