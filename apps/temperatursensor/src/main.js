@@ -1,6 +1,3 @@
-import { publishTemperature } from "./publisher.js";
-import mqtt from "mqtt";
-
 /**
  * Main entry point for the temperatursensor application.
  * The application periodically publishes the meassured temperature in a given room using the mqtt protocoll
@@ -8,6 +5,8 @@ import mqtt from "mqtt";
  * @requires mqtt
  * @exports CLIENT
  */
+import { publishTemperature } from "./publisher.js";
+import mqtt from "mqtt";
 
 /**
  * The connection string to connect to the message broker.

@@ -9,9 +9,10 @@ import { CLIENT } from "./main.js";
  */
 export function publishTemperature(topic, publishIntervall) {
     setInterval(() => {
+        let temperature;
+
         do {
-            // eslint-disable-next-line no-var -- this is a CLI application
-            var temperature = Math.floor(Math.random() * 100);
+            temperature = Math.floor(Math.random() * 100);
         } while (temperature > 30);
 
         CLIENT.publish(topic, temperature.toString());
