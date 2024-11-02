@@ -1,4 +1,6 @@
-import { CLIENT } from "./main.js";
+import { CLIENT, ROOM } from "./main.js";
+
+const placeholder = "-control";
 
 /**
  * Subscribes to a given topic and prints the received messages to the console.
@@ -8,9 +10,19 @@ import { CLIENT } from "./main.js";
  */
 function pollTemperature(topic) {
     CLIENT.subscribe(topic);
+    CLIENT.subscribe(`topic${placeholder}`);
     CLIENT.on("message", (receivedTopic, receivedMessage) => {
-        // eslint-disable-next-line no-console -- This project is only run from the console
-        console.log(`${receivedTopic}: ${receivedMessage.toString()}`);
+        if (receivedTopic === topic) {
+            // eslint-disable-next-line no-console -- this is a CLI application
+            console.log(
+                `The temperature in the ${ROOM} is ${receivedMessage.toString()}°C.`
+            );
+        } else if (receivedTopic === `topic${placeholder}`) {
+            // eslint-disable-next-line no-console -- this is a CLI application
+            console.log(
+                `Received message on topic ${receivedTopic}: ${receivedMessage.toString()}`
+            );
+        }
     });
 }
 

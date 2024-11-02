@@ -6,7 +6,6 @@
  * @exports CLIENT
  */
 import mqtt from "mqtt";
-import { publishTemperature } from "./producer.js";
 import { pollTemperature } from "./consumer.js";
 
 /**
@@ -22,20 +21,25 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
 const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 /**
+ * The room in which the thermostat is located.
+ * @constant {string}
+ */
+const ROOM = process.argv[2];
+
+/**
  * The topic to publish and subscribe to.
  * The first argument passed to node is appended and inidcates the room in which the thermostat is located.
  */
-const topic = `thermostat-${process.argv[2]}`;
+const topic = `thermostat-${ROOM}`;
 
-/**
- * The intervall after which the temperature is published in milliseconds.
- * @type {number}
- */
-const publishIntervall = 2000;
+// /**
+//  * The intervall after which the temperature is published in milliseconds.
+//  * @type {number}
+//  */
+// const publishIntervall = 2000;
 
 CLIENT.on("connect", () => {
-    publishTemperature(topic, publishIntervall);
     pollTemperature(topic);
 });
 
-export { CLIENT };
+export { CLIENT, ROOM };

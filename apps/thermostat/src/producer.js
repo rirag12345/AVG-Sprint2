@@ -1,21 +1,19 @@
-import { CLIENT } from "./main.js";
-
 /**
- * Publishes a (pseudo)random temperature to a given topic at specified intervals.
- * @author Philip Neuffer
- * @param {string} topic The topic to publish the temperature to.
- * @param {number} publishIntervall The interval in milliseconds after which to publish the temperature.
- * @returns {void}
+ * An object representing the heating levels of a thermostat.
+ * The keys are the levels of the thermostat, and the values are arrays,
+ * where the first value is the lower temperature limit and the second value is the upper temperature limit.
+ * @type {Object<number, [number, number]>}
  */
-function publishTemperature(topic, publishIntervall) {
-    setInterval(() => {
-        do {
-            // eslint-disable-next-line no-var -- var is used here because block scope is annoying in this case
-            var temperature = Math.floor(Math.random() * 100);
-        } while (temperature > 30);
-
-        CLIENT.publish(topic, temperature.toString());
-    }, publishIntervall);
-}
-
-export { publishTemperature };
+// eslint-disable-next-line no-unused-vars -- testing
+const radiatorHeatingLevel = {
+    1: [5, 10],
+    2: [12, 15],
+    3: [16, 18],
+    4: [19, 22],
+    5: [23, 25],
+    getRandomHeatingLevel() {
+        return Object.keys(this)[
+            Math.floor(Math.random() * Object.keys(this).length)
+        ];
+    }
+};
