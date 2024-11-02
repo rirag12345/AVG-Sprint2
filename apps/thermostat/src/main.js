@@ -34,12 +34,6 @@ export const room = process.argv[2];
  */
 const topic = `thermostat-${room}`;
 
-// /**
-//  * The intervall after which the temperature is published in milliseconds.
-//  * @type {number}
-//  */
-// const publishIntervall = 2000;
-
 CLIENT.on("connect", () => {
     pollTemperature(topic);
 });
