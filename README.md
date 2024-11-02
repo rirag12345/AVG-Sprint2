@@ -2,10 +2,10 @@
 
 ## Projektbeschreibung
 
-Das Projekt basert auf der gegebenen Aufgabenstellung und soll ein Smart Home Szenario mit der Verwendung der Integrationstechnik Nachrichtenaustausch unter der Verwendung 
+Das Projekt basert auf der gegebenen Aufgabenstellung und soll ein Smart Home Szenario mit der Verwendung der Integrationstechnik Nachrichtenaustausch unter der Verwendung
 des MQTT Protokolls und dem Message Broker Eclipse Mosquitto simulieren.
 
-# Verzeichnisstruktur 
+# Verzeichnisstruktur
 
 
 ## Mosquitto
@@ -21,5 +21,5 @@ Jedes dieser Projekte stellt eines der Devices aus der Aufgabenstellung dar (Tem
 
 ### Thermostat
 
-Die `thermostat`-Anwendung veröffentlicht zufällige Temperaturwerte (>= 30° Celsius) auf einem bestimmten Thema und abonniert dieses Thema ... 
-//TODO
+Die `thermostat`-Anwendung veröffentlicht zufällige Temperaturwerte (>= 30° Celsius) auf einem bestimmten Thema und abonniert dieses Thema ...
+//TODO complete this readme
