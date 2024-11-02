@@ -1,9 +1,10 @@
 /**
  * Main entry point for the thermostat application.
  * Responsible for connecting to mosquitto and starting the consumer and producer.
- * @author Philip Neuffer
+ * @module main
  * @requires mqtt
- * @exports CLIENT
+ * @exports Client
+ * @author Philip Neuffer
  */
 import mqtt from "mqtt";
 import { pollTemperature } from "./consumer.js";
@@ -18,19 +19,20 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-const CLIENT = mqtt.connect(CONNECTION_STRING);
+export const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 /**
  * The room in which the thermostat is located.
- * @constant {string}
+ * @type {string}
  */
-const ROOM = process.argv[2];
+export const room = process.argv[2];
 
 /**
- * The topic to publish and subscribe to.
+ * The topic to subscribe to.
  * The first argument passed to node is appended and inidcates the room in which the thermostat is located.
+ * @type {string}
  */
-const topic = `thermostat-${ROOM}`;
+const topic = `thermostat-${room}`;
 
 // /**
 //  * The intervall after which the temperature is published in milliseconds.
@@ -41,5 +43,3 @@ const topic = `thermostat-${ROOM}`;
 CLIENT.on("connect", () => {
     pollTemperature(topic);
 });
-
-export { CLIENT, ROOM };
