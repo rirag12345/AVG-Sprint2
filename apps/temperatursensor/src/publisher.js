@@ -7,7 +7,7 @@ import { CLIENT } from "./main.js";
  * @param {number} publishIntervall The interval in milliseconds after which to publish the temperature.
  * @returns {void}
  */
-function publishTemperature(topic, publishIntervall) {
+export function publishTemperature(topic, publishIntervall) {
     setInterval(() => {
         do {
             // eslint-disable-next-line no-var -- this is a CLI application
@@ -17,5 +17,3 @@ function publishTemperature(topic, publishIntervall) {
         CLIENT.publish(topic, temperature.toString());
     }, publishIntervall);
 }
-
-export { publishTemperature };

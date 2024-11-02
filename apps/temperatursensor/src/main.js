@@ -1,25 +1,25 @@
 import { publishTemperature } from "./publisher.js";
+import mqtt from "mqtt";
 
 /**
  * Main entry point for the temperatursensor application.
+ * The application periodically publishes the meassured temperature in a given room using the mqtt protocoll
  * @author Philip Neuffer
  * @requires mqtt
  * @exports CLIENT
  */
-// TODO: add explainaition of what this project does
-import mqtt from "mqtt";
 
 /**
  * The connection string to connect to the message broker.
  * @constant {string}
  */
-const connectionString = "mqtt://localhost:1883";
+const CONNECTION_STRING = "mqtt://localhost:1883";
 
 /**
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-const CLIENT = mqtt.connect(connectionString);
+export const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 /**
  * The room in which the temperatursensor is located.
@@ -35,12 +35,10 @@ const topic = `temperatursensor-${room}`;
 
 /**
  * The intervall after which the temperature is published in milliseconds.
- * @type {number}
+ * @constant {number}
  */
-const publishIntervall = 2000;
+const PUBLISH_INTERVALL = 2000;
 
 CLIENT.on("connect", () => {
-    publishTemperature(topic, publishIntervall);
+    publishTemperature(topic, PUBLISH_INTERVALL);
 });
-
-export { CLIENT };
