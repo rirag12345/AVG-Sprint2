@@ -1,3 +1,5 @@
+import { CLIENT } from "./main.js";
+
 /**
  * Publishes a (pseudo)random temperature to a given topic at specified intervals.
  * @author Philip Neuffer
@@ -15,3 +17,5 @@ function publishTemperature(topic, publishIntervall) {
         CLIENT.publish(topic, temperature.toString());
     }, publishIntervall);
 }
+
+export { publishTemperature };
