@@ -1,7 +1,7 @@
 {
     "name": "temperatursensor",
     "version": "1.0.0",
-    "description": "Quellcode für AVG Abgabe 2",
+    "description": "Quellcode des Temperatursensors für die Abgabe im AVG Sprint 2",
     "type": "module",
     "private": true,
     "main": "src/main.js",
@@ -14,7 +14,7 @@
     "contributors": [
         {
             "name": "Felix Jäger",
-            "email": "placeholder@dummy.net"
+            "email": "jafe1011@h-ka.de"
         },
         {
             "name": "Philip Neuffer",
