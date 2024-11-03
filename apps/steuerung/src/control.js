@@ -1,6 +1,6 @@
 /**
- * Control module for managing smart devices.
- * Using integration technique message exchange via MQTT topics.
+ * Control module for managing smart devices in a home.
+ * Using integration technique message exchange via MQTT.
  * Control acts as consumer and producer for messages.
  * @module control
  * @requires CLIENT
@@ -15,33 +15,40 @@ import { CLIENT } from "./main.js";
 const topics = [];
 
 /**
- * Starts the control.
+ * Handles the topics.
  * @returns {void}
  */
-export function start() {
-    console.log("Control started.");
-    topicHandler();
-    messageHandler();
-}
-
-/**
- * Handles the topics.
- */
 async function topicHandler() {
-    await CLIENT.on("packetsend", (packet) => {
-        console.log(`Received packet on topic ${receivedTopic = packet.topic}`);
-        if(!topics.includes(receivedTopic)) {
-            topics.Add(receivedTopic);
-            CLIENT.subribe(receivedTopic);
+    CLIENT.on("packetsend", packet => {
+        const receivedTopic = packet.topic;
+
+        // eslint-disable-next-line no-console -- debug message to console
+        console.debug(`received packet on topic ${receivedTopic}`);
+        if (!topics.includes(receivedTopic)) {
+            topics.push(receivedTopic);
+            CLIENT.subscribe(receivedTopic);
         }
     });
 }
 
 /**
  * Handles the messages.
+ * @returns {void}
  */
 async function messageHandler() {
-    await CLIENT.on("message", (receivedTopic, receivedMessage) => {
-        console.log(`Received message on topic ${receivedTopic}: ${receivedMessage.toString()}`);
+    CLIENT.on("message", (receivedTopic, receivedMessage) => {
+        // eslint-disable-next-line no-console -- debug message to console
+        console.debug(`received message on topic ${receivedTopic}: ${receivedMessage.toString()}`);
     });
+}
+
+/**
+ * Starts the control.
+ * @returns {void}
+ */
+export function start() {
+    // eslint-disable-next-line no-console -- message to console
+    console.info("control started.");
+    topicHandler();
+    messageHandler();
 }

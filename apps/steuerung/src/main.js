@@ -3,7 +3,6 @@
  * Responsible for connecting to mosquitto and starting the control itself.
  * @module main
  * @requires mqtt
- * @requires control
  * @exports CLIENT
  * @author Felix Jaeger
  */
@@ -23,6 +22,7 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
 export const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 CLIENT.on("connect", () => {
-    console.log("Connected to message broker.");
+    // eslint-disable-next-line no-console -- message to console
+    console.info("control application connected to message broker.");
     start();
 });
