@@ -1,12 +1,14 @@
 /**
- * Main entry point for the temperatursensor application.
- * The application periodically publishes the meassured temperature in a given room using the mqtt protocoll
- * @author Philip Neuffer
+ * Main entry point for the temperature sensor application.
+ * Responsible for connecting to mosquitto and starting the producer.
+ * @module main
  * @requires mqtt
  * @exports CLIENT
+ * @author Philip Neuffer
+ * @author Felix Jaeger
  */
-import { publishTemperature } from "./publisher.js";
 import mqtt from "mqtt";
+import { publishTemperature } from "./producer.js";
 
 /**
  * The connection string to connect to the message broker.
@@ -36,8 +38,10 @@ const topic = `temperatursensor-${room}`;
  * The intervall after which the temperature is published in milliseconds.
  * @constant {number}
  */
-const PUBLISH_INTERVALL = 2000;
+const PUBLISH_INTERVALL = 5000;
 
 CLIENT.on("connect", () => {
+    // eslint-disable-next-line no-console -- message to console
+    console.info("temperature sensor application connected to message broker.");
     publishTemperature(topic, PUBLISH_INTERVALL);
 });
