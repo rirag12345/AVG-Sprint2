@@ -19,11 +19,12 @@ const topics = [];
  * @returns {void}
  */
 async function topicHandler() {
-    CLIENT.on("packetsend", packet => {
-        const receivedTopic = packet.topic;
+    CLIENT.on("packetreceive", packet => {
+        const receivedTopic = packet.topic.toString();
+        const receivedMessage = packet.payload.toString();
 
         // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received packet on topic ${receivedTopic}`);
+        console.debug(`received packet on topic ${receivedTopic}: ${receivedMessage}`);
         if (!topics.includes(receivedTopic)) {
             topics.push(receivedTopic);
             CLIENT.subscribe(receivedTopic);
@@ -38,7 +39,7 @@ async function topicHandler() {
 async function messageHandler() {
     CLIENT.on("message", (receivedTopic, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received message on topic ${receivedTopic}: ${receivedMessage.toString()}`);
+        console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
     });
 }
 
