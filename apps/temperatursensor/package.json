@@ -1,32 +1,35 @@
 {
-  "name": "temperatursensor",
-  "version": "1.0.0",
-  "description": "Quellcode für AVG Abgabe 2",
-  "type": "module",
-  "private": true,
-  "main": "src/main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/main.js"
-  },
-  "contributors" : [
-    {
-      "name": "Felix Jäger",
-      "email": "placeholder@dummy.net"
+    "name": "temperatursensor",
+    "version": "1.0.0",
+    "description": "Quellcode des Temperatursensors für die Abgabe im AVG Sprint 2",
+    "type": "module",
+    "private": true,
+    "main": "src/main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/main.js",
+        "eslint": "eslint src/**/*.js",
+        "prettier": "prettier --write \"src/**/*.js\""
     },
-    {
-      "name": "Philip Neuffer",
-      "email": "neph1015@h-ka.de"
+    "contributors": [
+        {
+            "name": "Felix Jäger",
+            "email": "jafe1011@h-ka.de"
+        },
+        {
+            "name": "Philip Neuffer",
+            "email": "neph1015@h-ka.de"
+        }
+    ],
+    "license": "MIT License",
+    "dependencies": {
+        "mqtt": "5.10.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "9.13.0",
+        "eslint": "9.13.0",
+        "eslint-config-eslint": "11.0.0",
+        "globals": "^15.11.0",
+        "prettier": "^3.3.3"
     }
-  ],
-  "license": "MIT License",
-  "dependencies": {
-    "mqtt": "5.10.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "9.13.0",
-    "eslint": "9.13.0",
-    "eslint-config-eslint": "11.0.0",
-    "globals": "15.11.0"
-  }
 }

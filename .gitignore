@@ -135,3 +135,6 @@ task/
 # Mosquitto files to ignore
 /extras/compose/mosquitto/data/*
 /extras/compose/mosquitto/log/*
+
+# vscode files
+/.vscode
