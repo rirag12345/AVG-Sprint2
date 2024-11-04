@@ -17,7 +17,15 @@ function messageHandler() {
     CLIENT.on("message", (receivedTopic, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
         console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
-        CLIENT.publish("thermostat", "test:23", { qos: 1 }); // qos 1 to ensure reliablity.
+        const room = receivedMessage.toString().split(":")[0];
+        const temperature = receivedMessage.toString().split(":")[1];
+
+        // check if temperature is too low. if yes, turn on heating.
+        if (temperature < 18) {
+            // eslint-disable-next-line no-console -- message to console
+            console.info(`room ${room} is too cold (<18°C). turning on heating.`);
+            CLIENT.publish("thermostat", `${room}:23`, { qos: 1 }); // qos 1 to ensure reliablity.
+        }
     });
 }
 
