@@ -11,45 +11,70 @@ import { CLIENT } from "./main.js";
 
 /**
  * The topics the control is managing.
+ * Contains all registered devices with thair topics.
  */
 const topics = [];
 
 /**
- * Handles the topics.
+ * Register a new device.
+ * @param {string} device to register
  * @returns {void}
  */
-async function topicHandler() {
-    CLIENT.on("packetreceive", packet => {
-        const receivedTopic = packet.topic.toString();
-        const receivedMessage = packet.payload.toString();
+function registerDevice(device) {
+    topics.push(device);
+    CLIENT.subscribe(device, { qos: 1 }); // qos 1 to ensure reliablity.
+    // eslint-disable-next-line no-console -- debug message to console
+    console.debug(`registered new device: ${device}`);
+}
 
+/**
+ * Handles the messages in topics.
+ * @returns {void}
+ */
+function messageHandler() {
+    CLIENT.on("message", (receivedTopic, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received packet on topic ${receivedTopic}: ${receivedMessage}`);
-        if (!topics.includes(receivedTopic)) {
-            topics.push(receivedTopic);
-            CLIENT.subscribe(receivedTopic);
+        console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
+
+        // Check if device is pinging on 'control' topic.
+        if (receivedTopic === "control") {
+
+            // Check if new device is pinging.
+            if (!topics.includes(receivedMessage)) {
+                registerDevice(receivedMessage);
+            }
+        } else { // Registered device sended a message.
+
+            // Check if message was from a temperature sensor.
+            if (receivedTopic.contains("temperatursensor-")) {
+                // eslint-disable-next-line unicorn/prefer-string-slice, no-restricted-properties -- String.slice is outdated
+                const room = receivedTopic.substring(17);
+
+                // eslint-disable-next-line no-console -- debug message to console
+                console.debug(`received temperature for room ${room}: ${receivedMessage}°C`);
+            }
         }
     });
 }
 
 /**
- * Handles the messages.
- * @returns {void}
+ * Status whether control has already been started.
  */
-async function messageHandler() {
-    CLIENT.on("message", (receivedTopic, receivedMessage) => {
-        // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
-    });
-}
+let isStarted = false;
 
 /**
  * Starts the control.
  * @returns {void}
  */
 export function start() {
+
+    // Check if control is already started to prevent multiple starts.
+    if (isStarted) {
+        return;
+    }
+    isStarted = true;
     // eslint-disable-next-line no-console -- message to console
     console.info("control started.");
-    topicHandler();
+    CLIENT.subscribe("control", { qos: 1 }); // qos 1 to ensure reliablity.
     messageHandler();
 }

@@ -18,6 +18,6 @@ export function pollTemperature(topic) {
     CLIENT.subscribe(topic);
     CLIENT.on("message", receivedMessage => {
         // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`The thermostat received the command from the control to set the temparature of the heating to: ${receivedMessage.toString()}°C.`);
+        console.debug(`The thermostat received the command from the control to set the temparature of the heating to ${receivedMessage.toString()}°C.`);
     });
 }

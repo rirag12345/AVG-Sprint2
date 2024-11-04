@@ -1,6 +1,6 @@
 /**
  * Main entry point for the temperature sensor application.
- * Responsible for connecting to mosquitto and starting the producer.
+ * Responsible for connecting to the message broker mosquitto and starting the sensor itself.
  * @module main
  * @requires mqtt
  * @exports CLIENT
@@ -8,7 +8,7 @@
  * @author Felix Jaeger
  */
 import mqtt from "mqtt";
-import { publishTemperature } from "./producer.js";
+import { start } from "./sensor.js";
 
 /**
  * The connection string to connect to the message broker.
@@ -20,17 +20,22 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const CLIENT = mqtt.connect(CONNECTION_STRING);
+export const CLIENT = mqtt.connect(CONNECTION_STRING, {
+
+    // reconnectPeriod: 0, // prevent reconnecting
+    autoUseTopicAlias: true, // improve performance
+    autoAssignTopicAlias: true // improve performance
+});
 
 /**
- * The room in which the temperatursensor is located.
+ * The room in which the temperature sensor is located.
  * @constant {string}
  */
 const room = process.argv[2];
 
 /**
- * The topic to publish and subscribe to.
- * The first argument passed to node is appended and inidcates the room in which the temperaturesensor is located.
+ * The topic for the temperature sensor.
+ * The first argument passed to node is appended and inidcates the room in which the temperature sensor is located.
  */
 const topic = `temperatursensor-${room}`;
 
@@ -38,10 +43,30 @@ const topic = `temperatursensor-${room}`;
  * The intervall after which the temperature is published in milliseconds.
  * @constant {number}
  */
-const PUBLISH_INTERVALL = 5000;
+const PUBLISH_INTERVALL = 7000;
 
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("temperature sensor application connected to message broker.");
-    publishTemperature(topic, PUBLISH_INTERVALL);
+    start(topic, PUBLISH_INTERVALL);
+});
+
+CLIENT.on("reconnect", () => {
+    // eslint-disable-next-line no-console -- debug message to console
+    console.debug("temperature sensor application reconnecting to message broker.");
+});
+
+CLIENT.on("close", () => {
+    // eslint-disable-next-line no-console -- debug message to console
+    console.debug("temperature sensor application disconnected.");
+});
+
+CLIENT.on("offline", () => {
+    // eslint-disable-next-line no-console -- debug message to console
+    console.debug("temperature sensor application went offline.");
+});
+
+CLIENT.on("error", error => {
+    // eslint-disable-next-line no-console -- error message to console
+    console.error(`temperature sensor application encountered an error: ${error.message}`);
 });

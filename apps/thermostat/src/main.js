@@ -1,6 +1,6 @@
 /**
  * Main entry point for the thermostat application.
- * Responsible for connecting to mosquitto and starting the consumer.
+ * Responsible for connecting to the message mosquitto and starting the consumer.
  * @module main
  * @requires mqtt
  * @exports CLIENT
@@ -20,7 +20,12 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const CLIENT = mqtt.connect(CONNECTION_STRING);
+export const CLIENT = mqtt.connect(CONNECTION_STRING, {
+
+    // reconnectPeriod: 0, // prevent reconnecting
+    autoUseTopicAlias: true, // improve performance
+    autoAssignTopicAlias: true // improve performance
+});
 
 /**
  * The room in which the thermostat is located.
