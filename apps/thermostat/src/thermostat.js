@@ -12,7 +12,6 @@ import { CLIENT } from "./main.js";
 
 /**
  * Subscribes to a given topic and prints the received messages to the console.
- * @author Philip Neuffer
  * @param {string} room The room of the thermostat.
  * @returns {void}
  */
@@ -23,9 +22,16 @@ function pollTemperature(room) {
     CLIENT.on("message", (_, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
         console.debug(`received message: ${receivedMessage.toString()}`);
-        if (receivedMessage.toString().includes(room)) {
+
+        // regular expression for the message format from the control.
+        const regex = new RegExp(`^${room}:(0[0-9]|[12][0-9]|30)$`, "u");
+
+        // check if message is in the correct format.
+        if (regex.test(receivedMessage.toString())) {
+            const temperature = receivedMessage.toString().split(":")[1];
+
             // eslint-disable-next-line no-console -- debug message to console
-            console.debug(`The thermostat received the command from the control to set the temparature of the heating to ${receivedMessage.toString()}°C.`);
+            console.debug(`received the command from the control to set the temparature of the heating to ${temperature}°C.`);
         }
     });
 }

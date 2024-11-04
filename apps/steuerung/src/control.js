@@ -17,7 +17,7 @@ function messageHandler() {
     CLIENT.on("message", (receivedTopic, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
         console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
-        CLIENT.publish("thermostat", "test123", { qos: 1 }); // qos 1 to ensure reliablity.
+        CLIENT.publish("thermostat", "test:23", { qos: 1 }); // qos 1 to ensure reliablity.
     });
 }
 
