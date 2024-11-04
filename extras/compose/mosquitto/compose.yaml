@@ -6,7 +6,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256M
+          memory: 512M
     ports:
       - published: 1883
         target: 1883
