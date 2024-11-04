@@ -22,6 +22,7 @@ function publishTemperature(room, publishIntervall) {
         // Simulate temperature values between 0 and 30 degrees Celsius.
         const temperature = Math.floor(Math.random() * 0.3 * 100);
 
+        // Publish temperature to temperature sensor topic. ':" used as delimiter between room and temperature.
         CLIENT.publish("temperatursensor", `${room}:${temperature.toString()}`, { qos: 1 }, error => { // qos 1 to ensure reliablity.
             if (error) {
                 // eslint-disable-next-line no-console -- error message to console
