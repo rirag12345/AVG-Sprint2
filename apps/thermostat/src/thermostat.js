@@ -11,14 +11,14 @@
 import { CLIENT } from "./main.js";
 
 /**
- * Subscribes to a given topic and prints the received messages to the console.
+ * Reads commands from the control by listening to messages on the thermostat topic.
+ * Also checks if a message is a valid command to set the temperature for the heating of this room.
  * @param {string} room The room of the thermostat.
  * @returns {void}
  */
 function pollTemperature(room) {
     // eslint-disable-next-line no-console -- message to console
     console.info("temperature sensor started.");
-    CLIENT.subscribe("thermostat");
     CLIENT.on("message", (_, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
         console.debug(`received message: ${receivedMessage.toString()}`);
@@ -44,5 +44,6 @@ function pollTemperature(room) {
 export function start(room) {
     // eslint-disable-next-line no-console -- message to console
     console.info("thermostat started.");
+    CLIENT.subscribe("thermostat", { qos: 1 }); // qos 1 to ensure reliablity.
     pollTemperature(room);
 }
