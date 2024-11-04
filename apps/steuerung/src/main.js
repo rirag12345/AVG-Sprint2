@@ -3,8 +3,7 @@
  * Responsible for connecting to the message broker mosquitto and starting the control itself.
  * @module main
  * @requires mqtt
- * @exports REGISTRATION_CLIENT
- * @exports CONTROL_CLIENT
+ * @exports CLIENT
  * @author Felix Jaeger
  */
 import mqtt from "mqtt";
@@ -20,18 +19,11 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const REGISTRATION_CLIENT = mqtt.connect(CONNECTION_STRING, {
+export const CLIENT = mqtt.connect(CONNECTION_STRING, {
 
     // reconnectPeriod: 0, // prevent reconnecting
-    autoUseTopicAlias: true, // improve performance
-    autoAssignTopicAlias: true // improve performance
-});
-
-export const CONTROL_CLIENT = mqtt.connect(CONNECTION_STRING, {
-
-    // reconnectPeriod: 0, // prevent reconnecting
-    autoUseTopicAlias: true, // improve performance
-    autoAssignTopicAlias: true // improve performance
+    // autoUseTopicAlias: true, // improve performance
+    // autoAssignTopicAlias: true // improve performance
 });
 
 /**
@@ -39,7 +31,7 @@ export const CONTROL_CLIENT = mqtt.connect(CONNECTION_STRING, {
  */
 let isStarted = false;
 
-CONTROL_CLIENT.on("connect", () => {
+CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("control application connected to message broker.");
 
@@ -50,22 +42,22 @@ CONTROL_CLIENT.on("connect", () => {
     }
 });
 
-CONTROL_CLIENT.on("reconnect", () => {
+CLIENT.on("reconnect", () => {
     // eslint-disable-next-line no-console -- debug message to console
     console.debug("control application reconnecting to message broker.");
 });
 
-CONTROL_CLIENT.on("close", () => {
+CLIENT.on("close", () => {
     // eslint-disable-next-line no-console -- debug message to console
     console.debug("control application disconnected.");
 });
 
-CONTROL_CLIENT.on("offline", () => {
+CLIENT.on("offline", () => {
     // eslint-disable-next-line no-console -- debug message to console
     console.debug("control application went offline.");
 });
 
-CONTROL_CLIENT.on("error", error => {
+CLIENT.on("error", error => {
     // eslint-disable-next-line no-console -- error message to console
     console.error(`control application encountered an error: ${error.message}`);
 });

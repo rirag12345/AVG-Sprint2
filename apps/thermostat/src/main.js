@@ -8,7 +8,7 @@
  * @author Felix Jaeger
  */
 import mqtt from "mqtt";
-import { pollTemperature } from "./consumer.js";
+import { pollTemperature } from "./thermostat.js";
 
 /**
  * The connection string to connect to the message broker.
@@ -23,8 +23,8 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
 export const CLIENT = mqtt.connect(CONNECTION_STRING, {
 
     // reconnectPeriod: 0, // prevent reconnecting
-    autoUseTopicAlias: true, // improve performance
-    autoAssignTopicAlias: true // improve performance
+    // autoUseTopicAlias: true, // improve performance
+    // autoAssignTopicAlias: true // improve performance
 });
 
 /**
@@ -33,15 +33,8 @@ export const CLIENT = mqtt.connect(CONNECTION_STRING, {
  */
 const room = process.argv[2];
 
-/**
- * The topic to subscribe to.
- * The first argument passed to node is appended and inidcates the room in which the thermostat is located.
- * @type {string}
- */
-const topic = `thermostat-${room}`;
-
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("thermostat application connected to message broker.");
-    pollTemperature(topic);
+    pollTemperature(room);
 });

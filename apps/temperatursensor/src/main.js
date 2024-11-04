@@ -23,8 +23,8 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
 export const CLIENT = mqtt.connect(CONNECTION_STRING, {
 
     // reconnectPeriod: 0, // prevent reconnecting
-    autoUseTopicAlias: true, // improve performance
-    autoAssignTopicAlias: true // improve performance
+    // autoUseTopicAlias: true, // improve performance
+    // autoAssignTopicAlias: true // improve performance
 });
 
 /**
@@ -34,21 +34,15 @@ export const CLIENT = mqtt.connect(CONNECTION_STRING, {
 const room = process.argv[2];
 
 /**
- * The topic for the temperature sensor.
- * The first argument passed to node is appended and inidcates the room in which the temperature sensor is located.
- */
-const topic = `temperatursensor-${room}`;
-
-/**
  * The intervall after which the temperature is published in milliseconds.
  * @constant {number}
  */
-const PUBLISH_INTERVALL = 7000;
+const PUBLISH_INTERVALL = 5000;
 
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("temperature sensor application connected to message broker.");
-    start(topic, PUBLISH_INTERVALL);
+    start(room, PUBLISH_INTERVALL);
 });
 
 CLIENT.on("reconnect", () => {
