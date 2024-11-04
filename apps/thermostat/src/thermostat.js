@@ -23,10 +23,10 @@ function pollTemperature(room) {
         // eslint-disable-next-line no-console -- debug message to console
         console.debug(`received message: ${receivedMessage.toString()}`);
 
-        // regular expression for the message format from the control.
+        // regular expression for the message from the control. also checks for the correct room.
         const regex = new RegExp(`^${room}:(0[0-9]|[12][0-9]|30)$`, "u");
 
-        // check if message is in the correct format.
+        // check if message is a valid command.
         if (regex.test(receivedMessage.toString())) {
             const temperature = receivedMessage.toString().split(":")[1];
 
