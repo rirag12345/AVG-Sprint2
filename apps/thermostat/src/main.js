@@ -8,7 +8,7 @@
  * @author Felix Jaeger
  */
 import mqtt from "mqtt";
-import { pollTemperature } from "./thermostat.js";
+import { start } from "./thermostat.js";
 
 /**
  * The connection string to connect to the message broker.
@@ -36,5 +36,5 @@ const room = process.argv[2];
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("thermostat application connected to message broker.");
-    pollTemperature(room);
+    start(room);
 });

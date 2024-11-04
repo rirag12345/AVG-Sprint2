@@ -16,7 +16,7 @@ import { CLIENT } from "./main.js";
  * @param {string} room The room of the thermostat.
  * @returns {void}
  */
-export function pollTemperature(room) {
+function pollTemperature(room) {
     // eslint-disable-next-line no-console -- message to console
     console.info("temperature sensor started.");
     CLIENT.subscribe("thermostat");
@@ -28,4 +28,15 @@ export function pollTemperature(room) {
             console.debug(`The thermostat received the command from the control to set the temparature of the heating to ${receivedMessage.toString()}°C.`);
         }
     });
+}
+
+/**
+ * Starts the thermostat.
+ * @param {string} room The room of the thermostat.
+ * @returns {void}
+ */
+export function start(room) {
+    // eslint-disable-next-line no-console -- message to console
+    console.info("thermostat started.");
+    pollTemperature(room);
 }
