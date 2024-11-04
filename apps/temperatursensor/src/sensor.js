@@ -29,8 +29,8 @@ function publishTemperature(room, publishIntervall) {
                 console.error(`failed to publish temperature: ${error.message}`);
             }
         });
-        // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`published temperature of ${temperature}°C`);
+        // eslint-disable-next-line no-console -- message to console
+        console.info(`published temperature of ${temperature}°C`);
     }, publishIntervall);
 }
 

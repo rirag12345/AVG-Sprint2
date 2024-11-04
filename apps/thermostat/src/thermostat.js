@@ -17,8 +17,6 @@ import { CLIENT } from "./main.js";
  * @returns {void}
  */
 function pollTemperature(room) {
-    // eslint-disable-next-line no-console -- message to console
-    console.info("temperature sensor started.");
     CLIENT.on("message", (_, receivedMessage) => {
         // eslint-disable-next-line no-console -- debug message to console
         console.debug(`received message: ${receivedMessage.toString()}`);
@@ -30,8 +28,8 @@ function pollTemperature(room) {
         if (regex.test(receivedMessage.toString())) {
             const temperature = receivedMessage.toString().split(":")[1];
 
-            // eslint-disable-next-line no-console -- debug message to console
-            console.debug(`received the command from the control to set the temparature of the heating to ${temperature}°C.`);
+            // eslint-disable-next-line no-console -- message to console
+            console.info(`received the command from the control to set the temparature of the heating to ${temperature}°C.`);
         }
     });
 }
