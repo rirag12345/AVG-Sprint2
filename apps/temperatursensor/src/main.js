@@ -22,6 +22,7 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  */
 export const CLIENT = mqtt.connect(CONNECTION_STRING, {
 
+    // TODO: Check if this can be removed
     // reconnectPeriod: 0, // prevent reconnecting
     // autoUseTopicAlias: true, // improve performance
     // autoAssignTopicAlias: true // improve performance

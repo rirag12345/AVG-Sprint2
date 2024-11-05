@@ -31,6 +31,7 @@ function messageHandler() {
 
 /**
  * Status whether control has already been started.
+ * @type {boolean}
  */
 let isStarted = false;
 

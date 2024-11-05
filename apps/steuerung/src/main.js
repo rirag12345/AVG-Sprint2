@@ -28,6 +28,7 @@ export const CLIENT = mqtt.connect(CONNECTION_STRING, {
 
 /**
  * Status whether control was already connected to mosquitto.
+ * @type {boolean}
  */
 let isStarted = false;
 
