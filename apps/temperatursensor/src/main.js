@@ -39,23 +39,3 @@ CLIENT.on("connect", () => {
     console.info("temperature sensor application connected to message broker.");
     start(room, PUBLISH_INTERVALL);
 });
-
-CLIENT.on("reconnect", () => {
-    // eslint-disable-next-line no-console -- debug message to console
-    console.debug("temperature sensor application reconnecting to message broker.");
-});
-
-CLIENT.on("close", () => {
-    // eslint-disable-next-line no-console -- debug message to console
-    console.debug("temperature sensor application disconnected.");
-});
-
-CLIENT.on("offline", () => {
-    // eslint-disable-next-line no-console -- debug message to console
-    console.debug("temperature sensor application went offline.");
-});
-
-CLIENT.on("error", error => {
-    // eslint-disable-next-line no-console -- error message to console
-    console.error(`temperature sensor application encountered an error: ${error.message}`);
-});
