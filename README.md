@@ -31,7 +31,7 @@ Die `steuerung`-Anwendung...
 
 Aufruf mit `npm start`.
 
-Die geforderte `Log Datei` für Temperaturwerte [/control.log](/apps/steuerung/log/control.log) wird unter [/log](/apps/steuerung/log) generiert.
+Die geforderte Logdatei für Temperaturwerte (`control.log`) wird unter [/log](/apps/steuerung/log) generiert.
 
 ### Thermostat
 
