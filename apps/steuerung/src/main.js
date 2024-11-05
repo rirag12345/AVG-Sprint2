@@ -19,10 +19,10 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const CLIENT = mqtt.connect(CONNECTION_STRING, {});
+export const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 /**
- * Status whether control was already connected to mosquitto.
+ * Status whether control application was already connected to mosquitto.
  * @type {boolean}
  */
 let isStarted = false;
@@ -31,7 +31,7 @@ CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("control application connected to message broker.");
 
-    // Start the control if it was not already started.
+    // Start the control itself if it was not already started.
     if (!isStarted) {
         start();
         isStarted = true;

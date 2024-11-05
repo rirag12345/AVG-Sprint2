@@ -4,7 +4,7 @@
  * Sensor acts as producer for messages.
  * @module thermostat
  * @requires CLIENT
- * @exports pollTemperature
+ * @exports start
  * @author Philip Neuffer
  * @author Felix Jaeger
  */

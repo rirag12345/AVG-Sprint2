@@ -30,22 +30,10 @@ function messageHandler() {
 }
 
 /**
- * Status whether control has already been started.
- * @type {boolean}
- */
-let isStarted = false;
-
-/**
  * Starts the control.
  * @returns {void}
  */
 export function start() {
-
-    // Check if control is already started to prevent multiple starts.
-    if (isStarted) {
-        return;
-    }
-    isStarted = true;
     // eslint-disable-next-line no-console -- message to console
     console.info("control started.");
     CLIENT.subscribe("temperatursensor");

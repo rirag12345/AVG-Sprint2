@@ -20,7 +20,7 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const CLIENT = mqtt.connect(CONNECTION_STRING, {});
+export const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 /**
  * The room in which the thermostat is located.
