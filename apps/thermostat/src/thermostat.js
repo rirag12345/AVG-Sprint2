@@ -19,8 +19,6 @@ import { CLIENT } from "./main.js";
  */
 function pollTemperature(room) {
     CLIENT.on("message", (_, receivedMessage) => {
-        // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received message: ${receivedMessage.toString()}`);
 
         // regular expression for the message from the control. also checks for the correct room.
         const regex = new RegExp(`^${room}:(0[0-9]|[12][0-9]|30)$`, "u");

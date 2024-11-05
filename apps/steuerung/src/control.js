@@ -21,13 +21,13 @@ import fs from "node:fs";
  * @returns {void}
  */
 function messageHandler() {
-    CLIENT.on("message", (receivedTopic, receivedMessage) => {
-        // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
+    CLIENT.on("message", (_, receivedMessage) => {
+
+        // extracting room and temperature from received message.
         const room = receivedMessage.toString().split(":")[0];
         const temperature = receivedMessage.toString().split(":")[1];
 
-        // building current date with time to include in log file. comes in UTC time zone.
+        // determine current date with time to include in log file. comes in UTC time zone.
         const DateTime = new Date();
 
         // converting dateTime to ISO string.
