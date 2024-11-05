@@ -20,11 +20,18 @@ function messageHandler() {
         const room = receivedMessage.toString().split(":")[0];
         const temperature = receivedMessage.toString().split(":")[1];
 
-        // check if temperature is too low. if yes, turn on heating.
-        if (temperature < 18) {
+        // check if temperature is too low. if yes, turn up heating.
+        if (temperature < 19) {
             // eslint-disable-next-line no-console -- message to console
-            console.info(`room ${room} is too cold (<18°C). turning on heating.`);
+            console.info(`room ${room} is too cold (<19°C). turning up heating.`);
             CLIENT.publish("thermostat", `${room}:23`);
+        }
+
+        // check if temperature is high enough. if yes, turn down heating.
+        if (temperature >= 23) {
+            // eslint-disable-next-line no-console -- message to console
+            console.info(`room ${room} is warm enough (>=23°C). turning down heating.`);
+            CLIENT.publish("thermostat", `${room}:19`);
         }
     });
 }
