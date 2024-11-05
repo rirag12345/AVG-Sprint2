@@ -24,7 +24,7 @@ export const CLIENT = mqtt.connect(CONNECTION_STRING);
 
 /**
  * The room in which the thermostat is located.
- * @type {string}
+ * @constant {string}
  */
 const room = process.argv[2];
 
