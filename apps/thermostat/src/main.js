@@ -1,6 +1,6 @@
 /**
  * Main entry point for the thermostat application.
- * Responsible for connecting to the message mosquitto and starting the consumer.
+ * Responsible for connecting to the message broker mosquitto and starting the consumer.
  * @module main
  * @requires mqtt
  * @exports CLIENT

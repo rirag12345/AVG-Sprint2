@@ -32,10 +32,10 @@ const room = process.argv[2];
  * The intervall after which the temperature is published in milliseconds.
  * @constant {number}
  */
-const PUBLISH_INTERVALL = 100;
+const PUBLISH_INTERVAL = 100;
 
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
     console.info("temperature sensor application connected to message broker.");
-    start(room, PUBLISH_INTERVALL);
+    start(room, PUBLISH_INTERVAL);
 });

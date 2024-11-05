@@ -1,4 +1,4 @@
-@startuml Kompomnentendiagramm
+@startuml Komponentendiagramm
 skinparam componentStyle uml2
 
 package sensoren{

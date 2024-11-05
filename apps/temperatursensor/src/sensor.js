@@ -11,12 +11,12 @@
 import { CLIENT } from "./main.js";
 
 /**
- * Publishes a (pseudo)random temperature with it's room to the temperature sensor topic at specified intervals.
+ * Publishes a (pseudo)random temperature with its room to the temperature sensor topic at specified intervals.
  * @param {string} room The room of the temperature sensor.
- * @param {number} publishIntervall The interval in milliseconds at which the temperature should be published.
+ * @param {number} publishInterval The interval in milliseconds at which the temperature should be published.
  * @returns {void}
  */
-function publishTemperature(room, publishIntervall) {
+function publishTemperature(room, publishInterval) {
     setInterval(() => {
 
         // Simulate temperature values between 0 and 30 degrees Celsius.
@@ -26,17 +26,17 @@ function publishTemperature(room, publishIntervall) {
         CLIENT.publish("temperatursensor", `${room}:${temperature.toString()}`);
         // eslint-disable-next-line no-console -- message to console
         console.info(`published temperature of ${temperature}°C`);
-    }, publishIntervall);
+    }, publishInterval);
 }
 
 /**
  * Starts the sensor.
  * @param {string} room The room of the temperature sensor.
- * @param {number} publishIntervall The interval in milliseconds at which the temperature should be published.
+ * @param {number} publishInterval The interval in milliseconds at which the temperature should be published.
  * @returns {void}
  */
-export function start(room, publishIntervall) {
+export function start(room, publishInterval) {
     // eslint-disable-next-line no-console -- message to console
     console.info("temperature sensor started.");
-    publishTemperature(room, publishIntervall);
+    publishTemperature(room, publishInterval);
 }
