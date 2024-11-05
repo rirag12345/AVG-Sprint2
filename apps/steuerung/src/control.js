@@ -1,5 +1,8 @@
 /**
  * Control module for managing smart devices in a home.
+ * Managing heating in rooms by commanding thermostats based on temperature values from temperature sensors.
+ * Using treshold to decide if heating should turned up or down.
+ * Also creates a log file for temperature values.
  * Using integration technique message exchange via MQTT.
  * Control acts as consumer and producer for messages.
  * @module control
@@ -11,7 +14,10 @@ import { CLIENT } from "./main.js";
 import fs from "node:fs";
 
 /**
- * Handles the incoming messages from all temperature sensors.
+ * Handles incoming messages from all temperature sensors.
+ * Checks if temperature is below or above teshhold.
+ * Sends commands to thermostats to turn up or turn down heating.
+ * Logs the temperature values into the log file.
  * @returns {void}
  */
 function messageHandler() {
@@ -20,6 +26,15 @@ function messageHandler() {
         console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
         const room = receivedMessage.toString().split(":")[0];
         const temperature = receivedMessage.toString().split(":")[1];
+
+        // building current date with time to include in log file. comes in UTC time zone.
+        const DateTime = new Date();
+
+        // converting dateTime to ISO string.
+        const timestamp = DateTime.toISOString();
+
+        // log temperature into log file.
+        fs.appendFile("./log/control.log", `${timestamp}: temperature in room ${room}: ${temperature}°C\n`, () => {});
 
         // check if temperature is too low. if yes, turn up heating.
         if (temperature < 19) {
@@ -46,7 +61,7 @@ export function start() {
     console.info("control started.");
 
     // create log file.
-    fs.writeFile("./log/control.log", "-------------- temperature log file --------------\n", () => {});
+    fs.writeFile("./log/control.log", "-------------------- temperature log file --------------------\n", () => {});
 
     // subscribe to temperature sensors topic to receive temperature values from all sensors.
     CLIENT.subscribe("temperatursensor");
