@@ -1,0 +1,31 @@
+@startuml Kompomnentendiagramm
+skinparam componentStyle uml2
+
+package sensoren{
+    [temperatursensor] as sensor
+}
+package thermostate{
+    [thermostat] as thermostat
+}
+
+[steuerung] as steuerung
+[mosquitto-broker] as mosquitto
+
+() "publish" as p_sensor
+() "subscribe" as s_sensor
+() "publish" as p_thermo
+() "subscribe" as s_thermo
+
+steuerung <.. () s_sensor
+() s_sensor .. mosquitto
+steuerung ..> () p_thermo
+() p_thermo .. mosquitto
+
+sensor ..> () p_sensor
+() p_sensor .. mosquitto
+
+thermostat ..> () s_thermo
+() s_thermo .. mosquitto
+
+footer "Komponentendiagramm AVG - Gruppe - 2 \n @Felix Jäger, @Philip Neuffer"
+@enduml
