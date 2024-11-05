@@ -19,7 +19,8 @@ Mosquitto kann aus dem diesem Verzeichnis mittels ```docker compose up```gestart
 Das Projekt beinhaltet drei "Unterprojekte", welche unter [/apps](/apps) zu finden sind.
 Jedes dieser Projekte stellt eines der Devices aus der Aufgabenstellung dar (Temperatursensoren, Thermostate, Steuerung)
 
-### Thermostat
+### Temperatursensor
 
-Die `thermostat`-Anwendung veröffentlicht zufällige Temperaturwerte (>= 30° Celsius) auf einem bestimmten Thema und abonniert dieses Thema ...
+Die `temperatursensor`-Anwendung veröffentlicht zufällige Temperaturwerte (zwischen 0° und 30° Celsius) auf dem `temperatursensor`-Thema.
+
 //TODO complete this readme
