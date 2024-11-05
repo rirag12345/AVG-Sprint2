@@ -20,13 +20,7 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const CLIENT = mqtt.connect(CONNECTION_STRING, {
-
-    // TODO: Check if this can be removed
-    // reconnectPeriod: 0, // prevent reconnecting
-    // autoUseTopicAlias: true, // improve performance
-    // autoAssignTopicAlias: true // improve performance
-});
+export const CLIENT = mqtt.connect(CONNECTION_STRING, {});
 
 /**
  * The room in which the temperature sensor is located.
@@ -38,7 +32,7 @@ const room = process.argv[2];
  * The intervall after which the temperature is published in milliseconds.
  * @constant {number}
  */
-const PUBLISH_INTERVALL = 5000;
+const PUBLISH_INTERVALL = 100;
 
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console

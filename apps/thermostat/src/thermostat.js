@@ -29,7 +29,7 @@ function pollTemperature(room) {
             const temperature = receivedMessage.toString().split(":")[1];
 
             // eslint-disable-next-line no-console -- message to console
-            console.info(`received the command from the control to set the temparature of the heating to ${temperature}°C.`);
+            console.info(`set temparature of the heating to ${temperature}°C.`);
         }
     });
 }
@@ -42,6 +42,6 @@ function pollTemperature(room) {
 export function start(room) {
     // eslint-disable-next-line no-console -- message to console
     console.info("thermostat started.");
-    CLIENT.subscribe("thermostat", { qos: 1 }); // qos 1 to ensure reliablity.
+    CLIENT.subscribe("thermostat");
     pollTemperature(room);
 }

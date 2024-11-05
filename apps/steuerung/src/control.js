@@ -10,7 +10,7 @@
 import { CLIENT } from "./main.js";
 
 /**
- * Handles the registration messages.
+ * Handles the incoming messages from all temperature sensors.
  * @returns {void}
  */
 function messageHandler() {
@@ -24,7 +24,7 @@ function messageHandler() {
         if (temperature < 18) {
             // eslint-disable-next-line no-console -- message to console
             console.info(`room ${room} is too cold (<18°C). turning on heating.`);
-            CLIENT.publish("thermostat", `${room}:23`, { qos: 1 }); // qos 1 to ensure reliablity.
+            CLIENT.publish("thermostat", `${room}:23`);
         }
     });
 }
@@ -48,6 +48,6 @@ export function start() {
     isStarted = true;
     // eslint-disable-next-line no-console -- message to console
     console.info("control started.");
-    CLIENT.subscribe("temperatursensor", { qos: 1 }); // qos 1 to ensure reliablity.
+    CLIENT.subscribe("temperatursensor");
     messageHandler();
 }

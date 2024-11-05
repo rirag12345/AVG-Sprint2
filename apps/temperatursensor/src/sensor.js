@@ -23,12 +23,7 @@ function publishTemperature(room, publishIntervall) {
         const temperature = Math.floor(Math.random() * 0.3 * 100);
 
         // Publish temperature to temperature sensor topic. ':" used as delimiter between room and temperature.
-        CLIENT.publish("temperatursensor", `${room}:${temperature.toString()}`, { qos: 1 }, error => { // qos 1 to ensure reliablity.
-            if (error) {
-                // eslint-disable-next-line no-console -- error message to console
-                console.error(`failed to publish temperature: ${error.message}`);
-            }
-        });
+        CLIENT.publish("temperatursensor", `${room}:${temperature.toString()}`);
         // eslint-disable-next-line no-console -- message to console
         console.info(`published temperature of ${temperature}°C`);
     }, publishIntervall);

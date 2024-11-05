@@ -19,12 +19,7 @@ const CONNECTION_STRING = "mqtt://localhost:1883";
  * The mqtt client for the message broker.
  * @constant {mqtt.Client}
  */
-export const CLIENT = mqtt.connect(CONNECTION_STRING, {
-
-    // reconnectPeriod: 0, // prevent reconnecting
-    // autoUseTopicAlias: true, // improve performance
-    // autoAssignTopicAlias: true // improve performance
-});
+export const CLIENT = mqtt.connect(CONNECTION_STRING, {});
 
 /**
  * Status whether control was already connected to mosquitto.
