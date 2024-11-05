@@ -8,6 +8,7 @@
  * @author Felix Jaeger
  */
 import { CLIENT } from "./main.js";
+import fs from "node:fs";
 
 /**
  * Handles the incoming messages from all temperature sensors.
@@ -43,6 +44,11 @@ function messageHandler() {
 export function start() {
     // eslint-disable-next-line no-console -- message to console
     console.info("control started.");
+
+    // create log file.
+    fs.writeFile("./log/control.log", "-------------- temperature log file --------------\n", () => {});
+
+    // subscribe to temperature sensors topic to receive temperature values from all sensors.
     CLIENT.subscribe("temperatursensor");
     messageHandler();
 }
