@@ -21,6 +21,20 @@ Jedes dieser Projekte stellt eines der Devices aus der Aufgabenstellung dar (Tem
 
 ### Temperatursensor
 
-Die `temperatursensor`-Anwendung veröffentlicht zufällige Temperaturwerte (zwischen 0° und 30° Celsius) auf dem `temperatursensor`-Thema.
+Die `temperatursensor`-Anwendung simuliert einen Temperatursensor, welcher zufällige Temperaturwerte (zwischen 0° und 30° Celsius) auf dem `temperatursensor`-Thema veröffentlicht. 
 
-//TODO complete this readme
+Aufruf mit `npm start <raum>`, wobei für `<raum>` ein beliebiger Raum angegeben werden kann, indem sich der Sensor befindet. Wird kein Raum angegeben, befindet sich der Sensor in keinem Raum.
+
+### Steuerung
+
+Die `steuerung`-Anwendung...
+
+Aufruf mit `npm start`.
+
+### Thermostat
+
+Die `thermostat`-Anwendung...
+
+Aufruf mit `npm start <raum>`, wobei für `<raum>` ein beliebiger Raum angegeben werden kann, indem sich das Thermostat befindet. Wird kein Raum angegeben, befindet sich das Thermostat in keinem Raum.
+
+TODO Readme zu ende schreiben !!!
