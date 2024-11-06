@@ -11,14 +11,14 @@
 import { CLIENT } from "./main.js";
 
 /**
- * Adjusts the given Temperature by a random value between +- 10%
+ * Adjusts the given Temperature by a random value between +- 10% and returns the nearest integer
  * @param {number} temperature Ther temperature to be adjusted.
- * @returns {number} The adjusted temperature.
+ * @returns {number} The adjusted temperature (integer).
  */
 function adjustTemperature(temperature) {
     const factor = 0.1;
 
-    return ((Math.random() * 2 - 1) * factor * temperature) + temperature;
+    return Math.round((Math.random() * 2 - 1) * factor * temperature) + temperature;
 }
 
 /**
