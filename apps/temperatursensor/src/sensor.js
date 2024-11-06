@@ -29,8 +29,6 @@ function adjustTemperature(temperature) {
 
     // Make sure the temperature stays within [0, 30].
     result = Math.max(0, Math.min(30, result));
-
-    // rounding has to occur in the final step due to the small factor
     return Math.ceil(result);
 }
 
