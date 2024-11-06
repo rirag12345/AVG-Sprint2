@@ -11,14 +11,27 @@
 import { CLIENT } from "./main.js";
 
 /**
- * Adjusts the given Temperature by a random value between +- 10% and returns the nearest integer
- * @param {number} temperature Ther temperature to be adjusted.
- * @returns {number} The adjusted temperature (integer).
+ * Adjusts the given Temperature by a random value between +- 20%
+ * The returned value will alway be between 0 and 30 and atleast differ by 1
+ * @param {number} temperature The temperature to be adjusted.
+ * @returns {number} The adjusted temperature - will always be a integer.
  */
 function adjustTemperature(temperature) {
-    const factor = 0.1;
+    const factor = 0.2;
+    let result = ((Math.random() * 2 - 1) * factor * temperature) + temperature;
 
-    return Math.round((Math.random() * 2 - 1) * factor * temperature) + temperature;
+    /* Make sure the temperature differs by at least 1.
+    *  This is to prevent the temperature from staying the same value for long.
+    */
+    if (Math.abs(result - temperature) < 1) {
+        result += (Math.random() < 0.5) ? 1 : -1;
+    }
+
+    // Make sure the temperature stays within [0, 30].
+    result = Math.max(0, Math.min(30, result));
+
+    // rounding has to occur in the final step due to the small factor
+    return Math.ceil(result);
 }
 
 /**
@@ -29,8 +42,8 @@ function adjustTemperature(temperature) {
  */
 function publishTemperature(room, publishInterval) {
 
-    // Simulate temperature values between 0 and 30 degrees Celsius.
-    let temperature = Math.floor(Math.random() * 30);
+    // Initial temperature value of 19° C.
+    let temperature = 19;
 
     setInterval(() => {
         temperature = adjustTemperature(temperature);
