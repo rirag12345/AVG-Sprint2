@@ -67,6 +67,3 @@ export function start() {
     CLIENT.subscribe("temperatursensor");
     messageHandler();
 }
-
-
-// test123

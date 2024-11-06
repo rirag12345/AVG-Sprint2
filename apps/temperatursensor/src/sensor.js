@@ -12,7 +12,7 @@ import { CLIENT } from "./main.js";
 
 /**
  * Adjusts the given Temperature by a random value between +- 20%
- * The returned value will alway be between 0 and 30 and atleast differ by 1
+ * The returned value will be between 0 and 30 and atleast differ by 1.
  * @param {number} temperature The temperature to be adjusted.
  * @returns {number} The adjusted temperature - will always be a integer.
  */
@@ -21,7 +21,7 @@ function adjustTemperature(temperature) {
     let result = ((Math.random() * 2 - 1) * factor * temperature) + temperature;
 
     /* Make sure the temperature differs by at least 1.
-    *  This is to prevent the temperature from staying the same value for long.
+    *  This is to prevent the temperature from staying the same value.
     */
     if (Math.abs(result - temperature) < 1) {
         result += (Math.random() < 0.5) ? 1 : -1;
