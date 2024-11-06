@@ -12,7 +12,7 @@ import { CLIENT } from "./main.js";
 
 /**
  * Adjusts the given Temperature by a random value between +- 20%
- * The returned value will be between 0 and 30 and atleast differ by 1.
+ * The returned value will be between 0 and 25 and atleast differ by 1.
  * @param {number} temperature The temperature to be adjusted.
  * @returns {number} The adjusted temperature - will always be a integer.
  */
@@ -27,8 +27,8 @@ function adjustTemperature(temperature) {
         result += (Math.random() < 0.5) ? 1 : -1;
     }
 
-    // Make sure the temperature stays within [0, 30].
-    result = Math.max(0, Math.min(30, result));
+    // Make sure the temperature stays within [0, 25].
+    result = Math.max(0, Math.min(25, result));
     return Math.ceil(result);
 }
 
@@ -40,8 +40,8 @@ function adjustTemperature(temperature) {
  */
 function publishTemperature(room, publishInterval) {
 
-    // Initial temperature value of 19° C.
-    let temperature = 19;
+    // Initial temperature value of 10° C.
+    let temperature = 10;
 
     setInterval(() => {
         temperature = adjustTemperature(temperature);

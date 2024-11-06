@@ -32,7 +32,7 @@ const room = process.argv[2];
  * The intervall after which the temperature is published in milliseconds.
  * @constant {number}
  */
-const PUBLISH_INTERVAL = 100;
+const PUBLISH_INTERVAL = 1000;
 
 CLIENT.on("connect", () => {
     // eslint-disable-next-line no-console -- message to console
