@@ -1,6 +1,7 @@
 /**
  * Main entry point for the control application.
  * Responsible for connecting to the message broker mosquitto and starting the control itself.
+ * @module main
  * @requires mqtt
  * @exports CLIENT
  * @author Felix Jaeger
