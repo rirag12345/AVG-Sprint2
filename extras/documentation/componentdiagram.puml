@@ -1,5 +1,4 @@
 @startuml Komponentendiagramm
-skinparam componentStyle uml2
 
 package sensoren{
     [temperatursensor] as sensor
@@ -15,6 +14,15 @@ package thermostate{
 () "subscribe" as s_sensor
 () "publish" as p_thermo
 () "subscribe" as s_thermo
+
+note top of thermostat: Kann mehrere Thermostate enthalten
+note top of sensor: Kann mehrere Sensoren enthalten
+
+note right of s_sensor: topic temperatursensor
+note right of p_thermo: topic thermostat
+note right of p_sensor: topic temperatursensor
+note right of s_thermo: topic thermostat
+
 
 steuerung <.. () s_sensor
 () s_sensor .. mosquitto
