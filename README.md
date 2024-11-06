@@ -36,7 +36,7 @@ Die geforderte Logdatei für Temperaturwerte (`control.log`) wird unter [/log](/
 
 #### Thermostat
 
-Die `thermostat`-Anwendung simuliert einen Thermostat, welcher auf Befehle der `Steuerung` reagiert und die Heizunh hoch bzw. herunterschaltet.
+Die `thermostat`-Anwendung simuliert einen Thermostat, welcher auf Befehle der `Steuerung` reagiert und die Heizung hoch bzw. herunterschaltet.
 Es können beliebig viele `Thermostate` laufen
 
 Aufruf mit `npm start <raum>`, wobei für `<raum>` ein beliebiger Raum angegeben werden kann, indem sich das Thermostat befindet. Wird kein Raum angegeben, befindet sich das Thermostat in keinem Raum.
