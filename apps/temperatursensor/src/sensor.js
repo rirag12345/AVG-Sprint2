@@ -11,16 +11,29 @@
 import { CLIENT } from "./main.js";
 
 /**
+ * Adjusts the given Temperature by a random value between +- 10%
+ * @param {number} temperature Ther temperature to be adjusted.
+ * @returns {number} The adjusted temperature.
+ */
+function adjustTemperature(temperature) {
+    const factor = 0.1;
+
+    return ((Math.random() * 2 - 1) * factor * temperature) + temperature;
+}
+
+/**
  * Publishes a (pseudo)random temperature with its room to the temperature sensor topic at specified intervals.
  * @param {string} room The room of the temperature sensor.
  * @param {number} publishInterval The interval in milliseconds at which the temperature should be published.
  * @returns {void}
  */
 function publishTemperature(room, publishInterval) {
-    setInterval(() => {
 
-        // Simulate temperature values between 0 and 30 degrees Celsius.
-        const temperature = Math.floor(Math.random() * 0.3 * 100);
+    // Simulate temperature values between 0 and 30 degrees Celsius.
+    let temperature = Math.floor(Math.random() * 30);
+
+    setInterval(() => {
+        temperature = adjustTemperature(temperature);
 
         // Publish temperature to temperature sensor topic. ':" used as delimiter between room and temperature.
         CLIENT.publish("temperatursensor", `${room}:${temperature.toString()}`);
