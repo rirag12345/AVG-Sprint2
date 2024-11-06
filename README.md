@@ -40,3 +40,7 @@ Die `thermostat`-Anwendung simuliert einen Thermostat, welcher auf Befehle der `
 Es können beliebig viele `Thermostate` laufen
 
 Aufruf mit `npm start <raum>`, wobei für `<raum>` ein beliebiger Raum angegeben werden kann, indem sich das Thermostat befindet. Wird kein Raum angegeben, befindet sich das Thermostat in keinem Raum.
+
+## Komponentendiagram
+
+Ein Komponentendiagram kann unter [/extras/documentation](/extras/documentation) gefunden werden
