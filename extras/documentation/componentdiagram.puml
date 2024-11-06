@@ -1,0 +1,42 @@
+@startuml Komponentendiagramm
+
+scale 1920 width
+scale 1080 height
+
+package sensoren{
+    [temperatursensor] as sensor
+}
+package thermostate{
+    [thermostat] as thermostat
+}
+
+[steuerung] as steuerung
+[mosquitto-broker] as mosquitto
+
+() "publish" as p_sensor
+() "subscribe" as s_sensor
+() "publish" as p_thermo
+() "subscribe" as s_thermo
+
+note top of thermostat: Kann mehrere Thermostate enthalten
+note top of sensor: Kann mehrere Sensoren enthalten
+
+note right of s_sensor: topic temperatursensor
+note right of p_thermo: topic thermostat
+note right of p_sensor: topic temperatursensor
+note right of s_thermo: topic thermostat
+
+
+steuerung <.. () s_sensor
+() s_sensor .. mosquitto
+steuerung ..> () p_thermo
+() p_thermo .. mosquitto
+
+sensor ..> () p_sensor
+() p_sensor .. mosquitto
+
+thermostat ..> () s_thermo
+() s_thermo .. mosquitto
+
+footer "Komponentendiagramm AVG - Gruppe - 2 \n @Felix Jäger, @Philip Neuffer"
+@enduml
