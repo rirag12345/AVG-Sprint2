@@ -1,5 +1,8 @@
 @startuml Komponentendiagramm
 
+scale 1920 width
+scale 1080 height
+
 package sensoren{
     [temperatursensor] as sensor
 }
