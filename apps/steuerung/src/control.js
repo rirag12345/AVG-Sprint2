@@ -1,5 +1,8 @@
 /**
  * Control module for managing smart devices in a home.
+ * Managing heating in rooms by commanding thermostats based on temperature values from temperature sensors.
+ * Using treshold to decide if heating should turned up or down.
+ * Also creates a log file for temperature values.
  * Using integration technique message exchange via MQTT.
  * Control acts as consumer and producer for messages.
  * @module control
@@ -8,38 +11,44 @@
  * @author Felix Jaeger
  */
 import { CLIENT } from "./main.js";
+import fs from "node:fs";
 
 /**
- * The topics the control is managing.
- */
-const topics = [];
-
-/**
- * Handles the topics.
+ * Handles incoming messages from all temperature sensors.
+ * Checks if temperature is below or above teshhold.
+ * Sends commands to thermostats to turn up or turn down heating.
+ * Logs the temperature values into the log file.
  * @returns {void}
  */
-async function topicHandler() {
-    CLIENT.on("packetreceive", packet => {
-        const receivedTopic = packet.topic.toString();
-        const receivedMessage = packet.payload.toString();
+function messageHandler() {
+    CLIENT.on("message", (_, receivedMessage) => {
 
-        // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received packet on topic ${receivedTopic}: ${receivedMessage}`);
-        if (!topics.includes(receivedTopic)) {
-            topics.push(receivedTopic);
-            CLIENT.subscribe(receivedTopic);
+        // extracting room and temperature from received message.
+        const room = receivedMessage.toString().split(":")[0];
+        const temperature = receivedMessage.toString().split(":")[1];
+
+        // determine current date with time to include in log file. comes in UTC time zone.
+        const DateTime = new Date();
+
+        // converting dateTime to ISO string.
+        const timestamp = DateTime.toISOString();
+
+        // log temperature into log file.
+        fs.appendFile("./log/control.log", `${timestamp}: temperature in room ${room}: ${temperature}°C\n`, () => {});
+
+        // check if temperature is too low. if yes, turn up heating.
+        if (temperature < 19) {
+            // eslint-disable-next-line no-console -- message to console
+            console.info(`room ${room} is too cold (<19°C). turning up heating.`);
+            CLIENT.publish("thermostat", `${room}:23`);
         }
-    });
-}
 
-/**
- * Handles the messages.
- * @returns {void}
- */
-async function messageHandler() {
-    CLIENT.on("message", (receivedTopic, receivedMessage) => {
-        // eslint-disable-next-line no-console -- debug message to console
-        console.debug(`received message on topic ${receivedTopic.toString()}: ${receivedMessage.toString()}`);
+        // check if temperature is high enough. if yes, turn down heating.
+        if (temperature >= 23) {
+            // eslint-disable-next-line no-console -- message to console
+            console.info(`room ${room} is warm enough (>=23°C). turning down heating.`);
+            CLIENT.publish("thermostat", `${room}:19`);
+        }
     });
 }
 
@@ -50,6 +59,11 @@ async function messageHandler() {
 export function start() {
     // eslint-disable-next-line no-console -- message to console
     console.info("control started.");
-    topicHandler();
+
+    // create log file.
+    fs.writeFile("./log/control.log", "-------------------- temperature log file --------------------\n", () => {});
+
+    // subscribe to temperature sensors topic to receive temperature values from all sensors.
+    CLIENT.subscribe("temperatursensor");
     messageHandler();
 }

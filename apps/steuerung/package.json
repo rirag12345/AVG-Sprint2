@@ -30,6 +30,7 @@
         "eslint": "9.13.0",
         "eslint-config-eslint": "11.0.0",
         "globals": "^15.11.0",
+        "jsdoc": "^4.0.4",
         "prettier": "^3.3.3"
     }
 }
