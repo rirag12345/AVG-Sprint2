@@ -14,7 +14,7 @@ import { CLIENT } from "./main.js";
  * Adjusts the given Temperature by a random value between +- 20%
  * The returned value will be between 0 and 25 and atleast differ by 1.
  * @param {number} temperature The temperature to be adjusted.
- * @returns {number} The adjusted temperature - will always be a integer.
+ * @returns {number} The adjusted temperature - will always be an integer.
  */
 function adjustTemperature(temperature) {
     const factor = 0.2;
