@@ -1,17 +1,16 @@
-# AVG Sprint 2 Abgabe Gruppe 2
+# AVG Sprint 2 - Abgabe Gruppe 2
 
 ## Projektbeschreibung
 
-Das Projekt basert auf der gegebenen Aufgabenstellung und soll ein Smart Home Szenario mit der Verwendung der Integrationstechnik Nachrichtenaustausch unter der Verwendung
-des MQTT Protokolls und dem Message Broker Eclipse Mosquitto simulieren.
+Das Projekt basiert auf der gegebenen Aufgabenstellung und soll ein Smart Home Szenario unter Verwendung der Integrationstechnik Nachrichtenaustausch durch das MQTT Protokoll mit dem Message Broker Eclipse Mosquitto simulieren.
 
 ## Verzeichnisstruktur
 
 ### Mosquitto
 
-Die benötigten Dateien für Mosquitto liegen unter [/extras/compose/mosquitto](/extras/compose/mosquitto)
+Die benötigten Dateien für Mosquitto liegen unter [/extras/compose/mosquitto](/extras/compose/mosquitto).
 Zum starten von Mosquitto ist eine [compose.yaml](/extras/compose/mosquitto/compose.yaml) bereitgestellt.
-Mosquitto kann aus dem diesem Verzeichnis mittels ```docker compose up```gestartet werden.
+Mosquitto kann aus dem diesem Verzeichnis mittels `docker compose up` gestartet werden.
 
 ### Apps
 
@@ -26,7 +25,7 @@ Aufruf mit `npm start <raum>`, wobei für `<raum>` ein beliebiger Raum angegeben
 
 #### Steuerung
 
-Die `steuerung`-Anwendung realisiert die geforderte prototypische Steuerung, welche die anderen Devices verwaltet bzw. die Smart Home Steuerung realisiert. Die Steuerung empfängt über das `temperatursensor`-Thema Temperaturwerte für bestimmmte Räume und gibt abhängig davon Befehle an die Thermostate, welche auf dem `thermostat`-Thema veröffentlicht werden. Fällt beispielsweise die Temperatur in einem Raum unter 19° Celsius, werden die Heizungen in diesem Raum über ihre Thermostate aufgedreht, indem sie auf 23° Celsius gestellt werden. Erreicht die Temperatur in einem Raum 23° Celsius, ist der Raum warm genug und die Heizungen werden nach dem selben Prinzip heruntergedreht, indem sie auf 19° Celsius eingestellt werden.
+Die `steuerung`-Anwendung realisiert die geforderte prototypische Steuerung, welche die anderen Devices verwaltet bzw. die Smart Home Steuerung realisiert. Die Steuerung empfängt über das `temperatursensor`-Thema Temperaturwerte für bestimmte Räume und gibt abhängig davon Befehle an die Thermostate, welche auf dem `thermostat`-Thema veröffentlicht werden. Fällt beispielsweise die Temperatur in einem Raum unter 19° Celsius, werden die Heizungen in diesem Raum über ihre Thermostate aufgedreht, indem sie auf 23° Celsius gestellt werden. Erreicht die Temperatur in einem Raum 23° Celsius, ist der Raum warm genug und die Heizungen werden nach demselben Prinzip heruntergedreht, indem sie auf 19° Celsius eingestellt werden.
 
 Aufruf mit `npm start`. Es werden zur Laufzeit Log Nachrichten in der Konsole erzeugt.
 
@@ -45,3 +44,8 @@ Ein Komponentendiagramm kann unter [/extras/documentation](/extras/documentation
 ## Dokumentation mittels JSDoc
 
 HTML Hilfsseiten zur Dokumentation des Codes und dessen Funktionen sind unter [/extras/documentation/jsdoc/index.html](/extras/documentation/jsdoc/index.html) zu finden.
+
+## Voraussetzungen
+
+Für den Betrieb von Mosquitto wird Docker benötigt.
+Um die einzelnen Anwendungen verwenden zu können, wird Node bzw. npm benötigt. Bevor eine Anwendung wie oben beschrieben gestartet werden kann, muss in ihrem Wurzelverzeichniss `npm install` aufgerufen werden.
