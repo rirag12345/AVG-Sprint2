@@ -1,4 +1,4 @@
-# Hinweis: Dieses Projekt ist im Rahmen der Vorlesung "Automatisierung von Geschäftsprozessen" entstanden
+# Hinweis: Dieses Projekt ist im Rahmen des Moduls "Automatisierung von Geschäftsprozessen" entstanden
 
 ## Projektbeschreibung
 
