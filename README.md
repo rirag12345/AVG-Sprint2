@@ -1,4 +1,4 @@
-# AVG Sprint 2 - Abgabe Gruppe 2
+# Hinweis: Dieses Projekt ist im Rahmen der Vorlesung "Automatisierung von Geschäftsprozessen" entstanden
 
 ## Projektbeschreibung
 
